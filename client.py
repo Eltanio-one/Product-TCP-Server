@@ -6,7 +6,8 @@ HOST = HOST
 PORT = PORT
 HEADER = 64
 FORMAT = "utf-8"
-DISCONN_MSG = "!DISCONNECT"
+DISCONN_MSG = "DISCONNECT"
+NOTFOUND_MSG = "NOT FOUND"
 
 
 def main():
@@ -16,7 +17,16 @@ def main():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((HOST, PORT))
     send_data(sys.argv[1], client)
-    send_data(DISCONN_MSG, client)
+    data = client.recv(1024).decode(FORMAT)
+    if data == NOTFOUND_MSG:
+        print("[ERROR] That product code is not handled by this server...")
+        client.close()
+    elif data == DISCONN_MSG:
+        print("[DISCONNECT] Connection terminated...")
+        client.close()
+    else:
+        print(f"List Price: {data}")
+        client.close()
 
 
 def send_data(data, client):
