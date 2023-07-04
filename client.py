@@ -2,8 +2,6 @@ import socket
 import sys
 from keys import HOST, PORT
 
-HOST = HOST
-PORT = PORT
 HEADER = 64
 FORMAT = "utf-8"
 DISCONN_MSG = "DISCONNECT"
