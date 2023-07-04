@@ -21,6 +21,7 @@ def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # bind socket to the host and PORT
     sock.bind((HOST, PORT))
+    sock.settimeout(60.0)
     print("[STARTING] Server is starting...")
     start_socket(sock)
 
