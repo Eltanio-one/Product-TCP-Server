@@ -19,8 +19,8 @@ async def main():
     # flush write buffer
     await writer.drain()
     # wait for response from server
-    # 5 bytes as the largest list price covered in the dict is 5 bytes
-    list_price = await reader.read(5)
+    # 10 bytes as the largest string that could be passed is the disconnect message
+    list_price = await reader.read(10)
     # decode response
     list_price = list_price.decode()
     # handle not found and disconnecting messages
