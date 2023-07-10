@@ -8,8 +8,8 @@ PRODUCT_DICT = dict(zip(PRODUCT_LIST, PRICE_LIST))
 
 async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
     # collect the data sent by the client and their address
-    # 13 bytes as the largest product code covered in the dict is 12 bytes
-    data = await reader.read(13)
+    # 11 bytes as the largest product code covered in the dict is 11 bytes
+    data = await reader.read(11)
     addr, data = writer.get_extra_info("peername"), data.decode()
 
     # log the request
