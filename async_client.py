@@ -5,18 +5,25 @@ from globals import DISCONN_MSG, NOTFOUND_MSG
 
 
 async def main():
+    # handle command line arguments
     if len(sys.argv) != 2:
         print("Usage: client.py <product code>")
         return
-    # connect client socket to host and port
+    # await connection to be made via the global host and port
+    # returns reader and writer objects
     reader, writer = await asyncio.open_connection(HOST, PORT)
     # log message sending
     print(f"[SENDING] {sys.argv[1]}")
+    # send message to server
     writer.write(sys.argv[1].encode())
+    # flush write buffer
     await writer.drain()
-
-    list_price = await reader.read(1024)
+    # wait for response from server
+    # 13 bytes as the largest product code covered in the dict is 12 bytes
+    list_price = await reader.read(13)
+    # decode response
     list_price = list_price.decode()
+    # handle not found and disconnecting messages
     if list_price == NOTFOUND_MSG:
         print("[ERROR] That product code is not handled by this server...")
         writer.close()
