@@ -1,7 +1,6 @@
 import asyncio
 import sys
-from keys import HOST, PORT
-from globals import DISCONN_MSG, NOTFOUND_MSG
+from globals import DISCONN_MSG, NOTFOUND_MSG, HEADER, HOST, PORT
 
 
 async def main():
@@ -14,7 +13,12 @@ async def main():
     reader, writer = await asyncio.open_connection(HOST, PORT)
     # log message sending
     print(f"[SENDING] {sys.argv[1]}")
+    data = sys.argv[1].encode()
+    data_len = len(data)
+    send_length = str(data_len).encode()
+    send_length += b" " * (HEADER - len(send_length))
     # send message to server
+    writer.write(send_length)
     writer.write(sys.argv[1].encode())
     # flush write buffer
     await writer.drain()

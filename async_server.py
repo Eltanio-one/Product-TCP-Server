@@ -1,15 +1,18 @@
 import asyncio
-from keys import HOST, PORT, PRODUCT_LIST, PRICE_LIST
-from globals import DISCONN_MSG, NOTFOUND_MSG
+from setup import PRODUCT_LIST, PRICE_LIST
+from globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 # init product dictionary
 PRODUCT_DICT = dict(zip(PRODUCT_LIST, PRICE_LIST))
 
 
 async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
+    # receive header length data_len that is first sent by client
+    data_len = await reader.read(HEADER)
+    data_len = int(data_len.decode())
     # collect the data sent by the client and their address
     # 11 bytes as the largest product code covered in the dict is 11 bytes
-    data = await reader.read(11)
+    data = await reader.read(data_len)
     addr, data = writer.get_extra_info("peername"), data.decode()
 
     # log the request

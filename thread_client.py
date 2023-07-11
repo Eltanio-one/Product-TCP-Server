@@ -1,7 +1,6 @@
 import socket
 import sys
-from keys import HOST, PORT
-from globals import HEADER, DISCONN_MSG, NOTFOUND_MSG
+from globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 
 def main():
@@ -38,6 +37,9 @@ def send_data(data, client):
     data_len = len(data)
     # generate send-length based on header
     send_length = str(data_len).encode()
+    # pad out the send length to be 64 bytes long
+    # following TCP protocol of first sending the length of the message about to be sent
+    # before sending the message itself
     send_length += b" " * (HEADER - len(send_length))
     client.send(send_length)
     client.send(data)

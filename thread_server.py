@@ -1,7 +1,7 @@
 import socket
 import threading
-from keys import HOST, PORT, PRODUCT_LIST, PRICE_LIST
-from globals import HEADER, DISCONN_MSG, NOTFOUND_MSG
+from keys import PRODUCT_LIST, PRICE_LIST
+from globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 # init product dictionary
 PRODUCT_DICT = dict(zip(PRODUCT_LIST, PRICE_LIST))
@@ -25,7 +25,7 @@ def handle_client(conn, addr):
     """this function runs concurrently for each client"""
     print(f"[NEW CONNECTION] New connection by {addr}")
     while True:
-        # receieve decoded header (decoded using utf-8 format)
+        # receive decoded header (decoded using utf-8 format)
         data_len = conn.recv(HEADER).decode()
         if data_len:
             # convert data_len to int
