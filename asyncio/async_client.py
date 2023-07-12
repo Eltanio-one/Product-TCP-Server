@@ -1,6 +1,6 @@
 import asyncio
 import sys
-from globals import DISCONN_MSG, NOTFOUND_MSG, HEADER, HOST, PORT
+from resources.globals import DISCONN_MSG, NOTFOUND_MSG, HEADER, HOST, PORT
 
 
 async def main():

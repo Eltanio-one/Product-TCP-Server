@@ -1,7 +1,7 @@
 import socket
 import threading
-from keys import PRODUCT_LIST, PRICE_LIST
-from globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
+from resources.setup import PRODUCT_LIST, PRICE_LIST
+from resources.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 # init product dictionary
 PRODUCT_DICT = dict(zip(PRODUCT_LIST, PRICE_LIST))

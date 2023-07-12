@@ -1,6 +1,6 @@
 import socket
 import sys
-from globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
+from resources.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 
 def main():
