@@ -1,5 +1,10 @@
 import socket
 import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
 from config.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 
