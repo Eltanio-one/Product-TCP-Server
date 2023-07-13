@@ -13,7 +13,7 @@ from config.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 PRODUCT_DICT = dict(zip(PRODUCT_LIST, PRICE_LIST))
 
 
-def main():
+def main() -> None:
     # create socket object
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # bind socket to the host and PORT
@@ -27,7 +27,7 @@ def main():
     sock.close()
 
 
-def handle_client(conn, addr):
+def handle_client(conn, addr) -> None:
     """this function runs concurrently for each client"""
     print(f"[NEW CONNECTION] New connection by {addr}")
     while True:
@@ -59,7 +59,7 @@ def handle_client(conn, addr):
     conn.close()
 
 
-def start_socket(sock):
+def start_socket(sock: socket) -> None:
     """start the socket up"""
     print(f"[LISTENING] Server is listening on {HOST}...")
     # set socket to listen for requests

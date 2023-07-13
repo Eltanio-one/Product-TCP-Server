@@ -12,7 +12,9 @@ from config.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 PRODUCT_DICT = dict(zip(PRODUCT_LIST, PRICE_LIST))
 
 
-async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
+async def handle_client(
+    reader: asyncio.StreamReader, writer: asyncio.StreamWriter
+) -> None:
     # receive header length data_len that is first sent by client
     data_len = await reader.read(HEADER)
     data_len = int(data_len.decode())
@@ -55,7 +57,7 @@ async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWrit
         await writer.drain()
 
 
-async def main():
+async def main() -> None:
     # initialise our socket server with a callback function, and the relevant host and port
     sock = await asyncio.start_server(handle_client, HOST, PORT)
     # collect server address to be printed

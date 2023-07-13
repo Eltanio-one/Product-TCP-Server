@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 from config.globals import DISCONN_MSG, NOTFOUND_MSG, HEADER, HOST, PORT
 
 
-async def main():
+async def main() -> None:
     # handle command line arguments
     if len(sys.argv) != 2:
         print("Usage: client.py <product code>")

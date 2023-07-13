@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 from config.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 
-def main():
+def main() -> None:
     # ensure required CLI arguments passed
     if len(sys.argv) != 2:
         print("Usage: client.py <product code>")
@@ -23,7 +23,7 @@ def main():
     handle_response(data, client)
 
 
-def socket_setup(host, port):
+def socket_setup(host: str, port: int) -> socket:
     """setup client socket"""
     # initialise socket client-side, running on IPv4.
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +32,7 @@ def socket_setup(host, port):
     return client
 
 
-def send_data(data, client):
+def send_data(data: str, client: socket) -> None:
     """send product code to server"""
     # encode the data pre-send
     data = data.encode()
@@ -47,7 +47,7 @@ def send_data(data, client):
     client.send(data)
 
 
-def handle_response(data, client):
+def handle_response(data: str, client: socket) -> None:
     if data == NOTFOUND_MSG:
         print("[ERROR] That product code is not handled by this server...")
         client.close()
