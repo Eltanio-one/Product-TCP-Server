@@ -1,5 +1,5 @@
 import unittest
-from socket import socket
+import socket
 
 from config.setup import HOST, PORT
 from config.globals import HEADER
@@ -7,7 +7,7 @@ from config.globals import HEADER
 
 class TestCase(unittest.TestCase):
     def setUp(self):
-        self.sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((HOST, PORT))
 
     def test_response(self):
@@ -18,6 +18,9 @@ class TestCase(unittest.TestCase):
         self.sock.send(send_length)
         self.sock.send(data)
         self.assertEqual(self.sock.recv(1024).decode(), "£105")
+
+    def tearDown(self):
+        self.sock.close()
 
 
 if __name__ == "__main__":

@@ -19,6 +19,12 @@ class TestCase(unittest.IsolatedAsyncioTestCase):
         response = await self.reader.read(10)
         self.assertEqual(response.decode(), "£105")
 
+    async def asynctearDown(self):
+        self.reader.close()
+        self.writer.close()
+        await self.reader.wait_closed()
+        await self.writer.wait_closed()
+
 
 if __name__ == "__main__":
     unittest.main()
