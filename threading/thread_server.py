@@ -1,5 +1,11 @@
 import socket
 import threading
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
 from config.setup import PRODUCT_LIST, PRICE_LIST
 from config.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 

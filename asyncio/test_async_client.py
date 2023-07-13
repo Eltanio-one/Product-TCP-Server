@@ -1,5 +1,10 @@
 import unittest
 from asyncio import open_connection
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from config.setup import HOST, PORT
 from config.globals import HEADER
