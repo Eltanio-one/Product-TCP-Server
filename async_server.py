@@ -1,6 +1,6 @@
 import asyncio
-from setup_files.setup import PRODUCT_LIST, PRICE_LIST
-from setup_files.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
+from config.setup import PRODUCT_LIST, PRICE_LIST
+from config.globals import HEADER, DISCONN_MSG, NOTFOUND_MSG, HOST, PORT
 
 # init product dictionary
 PRODUCT_DICT = dict(zip(PRODUCT_LIST, PRICE_LIST))
